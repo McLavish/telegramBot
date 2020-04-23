@@ -53,39 +53,4 @@ module.exports = async (ctx) => {
         //console.log(e);
         await ctx.reply("Sorry, the BOT isn't able to fullfil your request at this time")
     }
-
-    if(!session.firstTime){
-        let chat = await ctx.getChat();
-        console.log(chat)
-
-        let checkChat = await Chat.findById(chat.id);
-        //console.log(docs);
-
-        if(!checkChat){
-            let newChar = new Chat({
-                _id: chat.id,
-                type: chat.type,
-                title: chat.title,
-                description: chat.description
-            });
-            newChar.save();
-        }
-
-        let member = await ctx.getChatMember(user.id);
-        console.log(member)
-
-        let checkUser = await User.findById(user.id);
-        //console.log(docs);
-
-        if(!checkUser){
-            let newUser = new User({
-                _id: user.id,
-                first_name: user.first_name,
-                language_code: user.language_code
-            });
-            newUser.save();
-        }
-
-        session.firstTime = true;
-    }
 }

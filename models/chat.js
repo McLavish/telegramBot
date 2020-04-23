@@ -7,8 +7,11 @@ const ChatSchema = new mongoose.Schema({
     title: String,
     description: String,
     members: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
+        status: String,
+        user: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User'
+        }
     }],
     messages: [{
         _id: Number,

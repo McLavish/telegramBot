@@ -1,6 +1,7 @@
 const fs = require('fs');
 const https = require('https');
 
+//UNUSED
 //Node.js Function to save image from External URL.
 function saveImageToDisk(url, localPath) {
     const fullUrl = url;
