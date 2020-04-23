@@ -1,9 +1,11 @@
-const mongoist = require('mongoist');
-const db = mongoist(process.env.MONGODB_CNN)
+const mongoose = require('mongoose');
+mongoose.connect(process.env.MONGODB_CNN, {useNewUrlParser: true});
 
-console.log(db);
+const db = mongoose.connection;
 
-module.exports.test = async () => {
-        let results = await db.documents.insertMany([ {a : 1}, {a : 2}, {a : 3}]);
-        console.log(results);
-}
+db.on('error', console.error.bind(console, 'connection error:'));
+
+db.once('open', function() {
+        // we're connected!
+        console.log("connected");
+});
