@@ -9,31 +9,37 @@ module.exports = async (ctx) => {
     if (member.is_bot)
         return;
 
-    let checkUser = await User.findById(user.id);
+    let checkUser = await User.findOne(user.pid);
 
-    if(!checkUser){
-        let newUser = new User({
-            _id: member.user.id,
+    console.log(checkUser);
+
+    let newUser;
+    if(!checkUser) {
+        newUser = new User({
+            id: member.user.id,
             first_name: member.user.first_name,
-            language_code: member.user.language_code
+            language_code: member.user.language_code,
+            context: "Me: Hello, how are you?\n",
+            creation_date: Math.floor(Date.now() / 1000)
         });
 
         await newUser.save();
     }
     let chat = await ctx.getChat();
 
-    let checkChat = await Chat.findById(chat.id);
+    let checkChat = await Chat.findOne(chat.pid);
 
     if(!checkChat){
 
         let newChat = new Chat({
-            _id: chat.id,
+            id: chat.id,
             type: chat.type,
             title: chat.title,
             description: chat.description,
+            creation_date: Math.floor(Date.now() / 1000),
             members: [{
                 status: member.status,
-                user: member.user.id
+                user: newUser._id
             }],
         });
 

@@ -1,10 +1,12 @@
 const mongoose = require('mongoose');
 
 const UserSchema = new mongoose.Schema({
-    _id: Number,
+    id: Number,
     first_name: String,
     username: String,
     language_code: String,
+    creation_date: Number,
+    context: String,
     chats: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Chat' }],
