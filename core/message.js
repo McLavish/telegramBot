@@ -19,25 +19,29 @@ module.exports = async (ctx) => {
     if (!session.user) {
         await init(ctx);
     }
-    let context = session.mongoUser.context;
+    let mongoUser = session.mongoUser;
 
     if (session.remember) {
-        context = message.text + "\n" + context;
+        mongoUser.context = message.text + "\n" + mongoUser.context;
         return;
     }
 
-    let modifiedPrompt = `${context}You: ${message.text}\nMe: `;
+    let modifiedPrompt = `${mongoUser.context}You: ${message.text}\nMe: `;
+
+    console.log(" ----------------------RAW INPUT ----------------------\n" + modifiedPrompt)
 
     try {
-        let response = await axios.post('https://6f45ce70.ngrok.io/predict', {
+        let response = await axios.post('https://16628c72.ngrok.io/predict', {
             prompt: modifiedPrompt,
             length: 60,
             timeout: 5000
         });
 
-        //console.log(response);
+        console.log(" ----------------------RAW RESPONSE ----------------------\n" + response.data.result);
 
         let filteredText = filterResponse(response.data.result);
+
+        console.log(" ----------------------FILTERED RESPONSE ----------------------\n" + filteredText);
 
         await ctx.reply(filteredText || "...");
 
@@ -45,21 +49,21 @@ module.exports = async (ctx) => {
 
         //console.log(lines);
 
-        context = lines.length > 5 ? lines.slice(-5).join('\n') : modifiedPrompt;
-        context += filteredText;
+        mongoUser.context = lines.length > 5 ? lines.slice(-5).join('\n') : modifiedPrompt;
+        mongoUser.context += filteredText;
 
         //console.log(ctx.session.context);
     } catch (e) {
-        //console.log(e);
+        console.log(e);
         await ctx.reply("Sorry, the BOT isn't able to fullfil your request at this time")
     }
 
     session.mongoChat.messages.push({
         id: message.id,
-        from: user.id,
+        from: session.mongoChat.type === 'private' ? '' : mongoUser.id,
         date: message.date,
         text: message.text
-    })
+    });
 
     await session.mongoChat.save();
     await session.mongoUser.save();
@@ -80,4 +84,19 @@ async function init(ctx){
 
     if(!session.mongoChat)
         throw new Error("Chat not found! Database might be corrupted");
+}
+
+function filterResponse(rawText) {
+
+    if (rawText.indexOf("you:") !== -1)
+        rawText = rawText.substring(0, rawText.indexOf("You:"));
+
+    if (rawText.indexOf("Me:") !== -1)
+        rawText = rawText.substring(0, rawText.indexOf("Me:"));
+
+    if (!rawText.endsWith("\n"))
+        rawText += '\n';
+
+    //rawText = rawText.endsWith("\n") ? rawText.substring(0, rawText.length - 1) : rawText;
+    return rawText;
 }

@@ -7,9 +7,11 @@ const UserSchema = new mongoose.Schema({
     language_code: String,
     creation_date: Number,
     context: String,
+    /*
     chats: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Chat' }],
+     */
 });
 
 module.exports = mongoose.model('User', UserSchema);

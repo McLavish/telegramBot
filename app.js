@@ -37,11 +37,3 @@ bot.on('text', core.message);
 bot.on('sticker', (ctx) => ctx.reply('👍'))
 
 bot.launch()
-
-function filterResponse(rawText) {
-   rawText = rawText.substring(0, rawText.indexOf("You:"));
-   if (rawText.indexOf("Me:") !== -1)
-      rawText = rawText.substring(0, rawText.indexOf("Me:"));
-   //rawText = rawText.endsWith("\n") ? rawText.substring(0, rawText.length - 1) : rawText;
-   return rawText;
-}
