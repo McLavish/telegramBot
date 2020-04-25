@@ -7,16 +7,18 @@ const timestamp = Math.floor(Date.now() / 1000);
 
 module.exports = async (ctx) => {
     let session = ctx.session;
-    let messageText = session.message.text;
+    let message = ctx.message;
 
-    if (session.date < timestamp)
+    console.log(ctx.message);
+
+    if (message.date < timestamp)
         return;
 
     else if (session.document == null)
         await sessionInit(ctx);
 
-    if (messageText.startsWith("/")) {
-        let command = messageText.slice(10).split(' ')[0];
+    if (message.text.startsWith("/")) {
+        let command = message.text.slice(10).split(' ')[0];
         switch (command) {
             case '/remember':
                 await remember(ctx);

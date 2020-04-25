@@ -1,11 +1,12 @@
 const axios = require('axios');
+const filterResponse = require('../utils/filter_response');
 
 module.exports = async (ctx) => {
     console.log(ctx.message);
     let message = ctx.message;
     let sessionDocument = ctx.session.document;
 
-    let modifiedPrompt = `${sessionDocument.context()}You: ${message.text}\nMe: `;
+    let modifiedPrompt = `${sessionDocument.context}You: ${message.text}\nMe: `;
 
     console.log(" ----------------------RAW INPUT ----------------------\n" + modifiedPrompt)
 

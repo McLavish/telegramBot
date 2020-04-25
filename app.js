@@ -1,27 +1,25 @@
 const Telegraf = require('telegraf');
 const session = require('telegraf/session')
 const mongoose = require('mongoose');
+const messageHandler = require('./core/message_handler');
+const databaseInit = require('./core/startup/database_init');
 
 mongoose.connect(process.env.MONGODB_CNN, {useNewUrlParser: true});
 
-const databaseInit = require('./core/startup/database_init')
-
-const token = "917033187:AAExsnknV2nQmH-oYEDH0eskojjJZD4T8uM";
-const bot = new Telegraf(token)
+const bot = new Telegraf(process.env.BOT_TOKEN)
 
 bot.use(session())
 
 bot.help((ctx) => ctx.reply('Send me a sticker'))
 
-bot.command('quit', (ctx) => {
-    // Using context shortcut
-    ctx.leaveChat()
-})
+bot.command('quit', async (ctx) => {
+    await ctx.leaveChat()
+});
 
 bot.start(databaseInit);
 
-bot.on('text', core.message);
+bot.on('text', messageHandler);
 
-bot.on('sticker', (ctx) => ctx.reply('👍'))
+bot.on('sticker', (ctx) => ctx.reply('ME NO LIKE STICKERS :('));
 
-bot.launch()
+bot.launch();
