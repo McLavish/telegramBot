@@ -1,15 +1,12 @@
-const response = require('./commands/response');
-const help = require('./commands/help');
-const remember = require('./commands/remember');
-const sessionInit = require('./session_init');
+const sessionInit = require('./startup/session_init');
+
+const commands = require('./commands');
 
 const timestamp = Math.floor(Date.now() / 1000);
 
 module.exports = async (ctx) => {
     let session = ctx.session;
     let message = ctx.message;
-
-    console.log(ctx.message);
 
     if (message.date < timestamp)
         return;
@@ -18,18 +15,25 @@ module.exports = async (ctx) => {
         await sessionInit(ctx);
 
     if (message.text.startsWith("/")) {
-        let command = message.text.slice(10).split(' ')[0];
+        let command = message.text.slice(0,9).split(' ')[0];
+        console.log(command);
         switch (command) {
             case '/remember':
-                await remember(ctx);
+                await commands.remember(ctx);
                 break;
             case '/prompt':
-                await prompt(ctx);
+                await commands.prompt(ctx);
+                break;
+            case '/revert':
+                await commands.revert(ctx);
+                break;
+            case '/alter':
+                await commands.alter(ctx);
                 break;
             default:
-                await help(ctx);
+                await commands.help(ctx);
         }
     } else {
-        await response(ctx);
+        await commands.response(ctx);
     }
 }

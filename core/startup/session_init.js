@@ -1,7 +1,7 @@
-const Chat = require("./models/chat");
-const User = require("./models/user");
+const Chat = require("../models/chat");
+const User = require("../models/user");
 
-const SessionDocument = require("./classes/session_document");
+const SessionDocument = require("../classes/session_document");
 
 module.exports = async (ctx) => {
     //console.log("Assigned session variable of user " + user.id);
