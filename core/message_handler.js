@@ -12,7 +12,7 @@ module.exports = async (ctx) => {
     if (session.date < timestamp)
         return;
 
-    else if (session.mongoUser == null || session.mongoChat == null)
+    else if (session.document == null)
         await sessionInit(ctx);
 
     if (messageText.startsWith("/")) {

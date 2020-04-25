@@ -1,17 +1,11 @@
-const mongoose = require('mongoose');
 const axios = require('axios');
-
-const timestamp = Math.floor(Date.now() / 1000);
 
 module.exports = async (ctx) => {
     console.log(ctx.message);
     let message = ctx.message;
-    let sender = message.from;
-    let session = ctx.session;
+    let sessionDocument = ctx.session.document;
 
-    let mongoUser = session.mongoUser;
-
-    let modifiedPrompt = `${mongoUser.context}You: ${message.text}\nMe: `;
+    let modifiedPrompt = `${sessionDocument.context()}You: ${message.text}\nMe: `;
 
     console.log(" ----------------------RAW INPUT ----------------------\n" + modifiedPrompt)
 
@@ -34,8 +28,8 @@ module.exports = async (ctx) => {
 
         //console.log(lines);
 
-        mongoUser.context = lines.length > 8 ? lines.slice(-8).join('\n') : modifiedPrompt;
-        mongoUser.context += filteredText;
+        sessionDocument.context = lines.length > 8 ? lines.slice(-8).join('\n') : modifiedPrompt;
+        sessionDocument.context += filteredText;
 
         //console.log(ctx.session.context);
     } catch (e) {
@@ -43,13 +37,11 @@ module.exports = async (ctx) => {
         await ctx.reply("Sorry, the BOT isn't able to fullfil your request at this time");
     }
 
-    session.mongoChat.messages.push({
+    sessionDocument.pushMessage({
         id: message.id,
-        from: session.mongoChat.type === 'private' ? '' : mongoUser.id,
         date: message.date,
         text: message.text
-    });
+    })
 
-    await session.mongoChat.save();
-    await session.mongoUser.save();
+    await sessionDocument.dbSave();
 }
