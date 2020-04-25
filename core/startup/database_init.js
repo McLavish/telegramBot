@@ -1,5 +1,5 @@
-const User = require("./models/user");
-const Chat = require("./models/chat");
+const User = require("../models/user");
+const Chat = require("../models/chat");
 
 module.exports = async (ctx) => {
     let user = ctx.message.from;
@@ -45,5 +45,5 @@ module.exports = async (ctx) => {
 
         await newChat.save();
     }
-    ctx.reply("AKNLOWLEDGE");
+    ctx.reply("Hello, how are you?");
 }
