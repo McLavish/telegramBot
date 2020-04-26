@@ -9,6 +9,12 @@ module.exports = class SessionDocument {
     set context(newContext) {
         this.mongoUser.context = newContext;
     }
+    get remember() {
+        return this.mongoUser.remember;
+    }
+    set remember(newRemember) {
+        this.mongoUser.remember = newRemember;
+    }
     pushMessage({ messageId, senderId = this.mongoUser.id, date, text }) {
         this.mongoChat.messages.push({
             id: messageId,

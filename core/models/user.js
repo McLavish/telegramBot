@@ -7,6 +7,7 @@ const UserSchema = new mongoose.Schema({
     language_code: String,
     creation_date: Number,
     context: String,
+    remember: String,
     /*
     chats: [{
         type: mongoose.Schema.Types.ObjectId,

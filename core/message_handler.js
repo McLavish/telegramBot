@@ -15,20 +15,28 @@ module.exports = async (ctx) => {
         await sessionInit(ctx);
 
     if (message.text.startsWith("/")) {
+
         let command = message.text.slice(0,9).split(' ')[0];
-        console.log(command);
+        let argument = message.text.replace(command,"").trim();
+
         switch (command) {
             case '/remember':
-                await commands.remember(ctx);
+                await commands.remember(ctx, argument);
+                break;
+            case '/forget':
+                await commands.forget(ctx);
                 break;
             case '/prompt':
-                await commands.prompt(ctx);
+                await commands.prompt(ctx, argument);
                 break;
             case '/revert':
                 await commands.revert(ctx);
                 break;
             case '/alter':
-                await commands.alter(ctx);
+                await commands.alter(ctx, argument);
+                break;
+            case '/continue':
+                await commands.continue(ctx);
                 break;
             default:
                 await commands.help(ctx);
@@ -36,4 +44,6 @@ module.exports = async (ctx) => {
     } else {
         await commands.response(ctx);
     }
+
+    console.log(session.document.remember);
 }

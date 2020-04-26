@@ -1,11 +1,8 @@
-const generateText = require('../utils/backend_generate_text');
+const generateText = require('../utils/backend_request');
 
-module.exports = async (ctx) => {
-    let text = ctx.message.text;
-    let prompt = text.slice(text.indexOf("/prompt") + 1).trim();
-
+module.exports = async (ctx, argument) => {
     try {
-        let response = await generateText(prompt,500)
+        let response = await generateText(argument,500)
 
         console.log(response.data.result);
 

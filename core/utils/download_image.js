@@ -1,11 +1,13 @@
 const fs = require('fs');
-const https = require('https');
+const axios = require('axios');
 
 //UNUSED
-//Node.js Function to save image from External URL.
-function saveImageToDisk(url, localPath) {
-    const fullUrl = url;
-    const file = fs.createWriteStream(localPath);
-    const request = https.get(url, function(response) {
-        response.pipe(file);
-    });}
+function saveImageToDisk(url = "https://xxx/my.pdf", localPath = "/temp/my.pdf") {
+    axios({
+        method: "get",
+        url: url,
+        responseType: "stream"
+    }).then(function (response) {
+        response.data.pipe(fs.createWriteStream(localPath));
+    });
+}
