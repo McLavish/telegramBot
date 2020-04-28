@@ -4,7 +4,8 @@ const config = require('../config');
 module.exports = async (ctx) => {
     let document = ctx.session.document;
 
-    let modifiedPrompt = `${document.context}You: ${ctx.message.text}${config.separator}Me: `;
+    //`${document.context}You: ${ctx.message.text}${config.separator}Me: `
+    let modifiedPrompt = document.context + config.userAlias + ctx.message.text + config.separator + config.botAlias;
 
     await generateText(ctx, modifiedPrompt);
 }
