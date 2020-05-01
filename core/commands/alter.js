@@ -1,8 +1,9 @@
 const config = require('../config');
+const filterInput = require('../utils/filter_input');
 
 async function alter(ctx, argument) {
     let document = ctx.session.document;
-
+    argument = filterInput(argument,config.separator);
     let lines = document.context.split(config.separator);
 
     //Take the last element and check if it's an empty string. (Empty string are generated because the separator is always appended at the end of the context)

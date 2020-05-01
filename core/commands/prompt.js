@@ -2,6 +2,12 @@ const generateText = require('../utils/backend_generate_text');
 const config = require('../config');
 
 async function prompt (ctx, argument) {
+
+    if (argument.length > config.maxPromptChars){
+        await ctx.reply(`The prompt cannot exceed ${config.maxPromptChars} characters`);
+        return;
+    }
+
     try {
         let response = await generateText(argument,500)
         await ctx.reply(response.data.result);

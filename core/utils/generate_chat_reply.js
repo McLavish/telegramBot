@@ -21,7 +21,10 @@ module.exports = async (ctx, modifiedPrompt) => {
         let filteredText = filterResponse(response.data.result);
 
         console.log(" ----------------------RESPONSE ----------------------\n" + filteredText)
-        await ctx.reply(filteredText);
+        if (filteredText)
+            await ctx.reply(filteredText);
+        else
+            await ctx.reply("...");
 
         //If the contexts number of lines exceed the number defined in the config file we cut the previous conversation saving only the last n lines
         document.context = lines.length > config.maxLinesStored ? lines.slice(-config.maxLinesStored).join(config.separator) : modifiedPrompt;

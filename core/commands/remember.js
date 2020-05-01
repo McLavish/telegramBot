@@ -1,25 +1,27 @@
 const config = require('../config');
+const filterInput = require('../utils/filter_input');
 
 async function remember (ctx, argument) {
     let document = ctx.session.document;
-    console.log(document.remember);
+    argument = filterInput(argument,config.separator);
 
     if (!argument) {
-        await ctx.reply("Your saved information is:\n" + document.remember.split(config.separator).join("\n"));
+        let message = document.remember ? "Your saved information is:\n"
+            + document.remember.split(config.separator).join("\n") : "You don't have anything saved";
+        await ctx.reply(message);
         return;
     }
 
     let newRemember = document.remember + argument + config.separator;
 
-    if (newRemember.length > 280)
-        await ctx.reply("Your saved information cannot exceed 280 characters");
-
-    else {
-        document.remember = newRemember;
-        await document.dbSave();
-
-        await ctx.reply("Updated successfully. Your new saved information is:\n" + document.remember.split(config.separator).join("\n"));
+    if (newRemember.length > config.maxRememberChars){
+        await ctx.reply(`Your saved information cannot exceed ${config.maxRememberChars} characters`);
+        return;
     }
+
+    document.remember = newRemember;
+    await document.dbSave();
+    await ctx.reply("Updated successfully. Your new saved information is:\n" + document.remember.split(config.separator).join("\n"));
 }
 
 module.exports = {
