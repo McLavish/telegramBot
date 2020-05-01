@@ -10,10 +10,10 @@ bot.use(session());
 
 bot.start(databaseInit);
 bot.on('text', messageHandler);
-bot.help((ctx) => ctx.reply('Send me a sticker'))
-bot.command('quit', async (ctx) => {
-    await ctx.leaveChat()
-});
+
 bot.on('sticker', (ctx) => ctx.reply('ME NO LIKE STICKERS :('));
+bot.on('audio', (ctx) => ctx.reply('I HAVE NO EARS :('));
+bot.on('photo', (ctx) => ctx.reply('I HAVE NO EYES :('));
+bot.on('document', (ctx) => ctx.reply('I HAVE NO READ :('));
 
 bot.launch();
