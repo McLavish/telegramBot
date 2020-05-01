@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 
+//https://core.telegram.org/bots/api#user
 const UserSchema = new mongoose.Schema({
     id: Number,
     first_name: String,
@@ -8,11 +9,6 @@ const UserSchema = new mongoose.Schema({
     creation_date: Number,
     context: String,
     remember: String,
-    /*
-    chats: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Chat' }],
-     */
 });
 
 module.exports = mongoose.model('User', UserSchema);

@@ -1,18 +1,17 @@
 const User = require("../models/user");
 const Chat = require("../models/chat");
 
+//This function is called only once, when to user uses /start
 module.exports = async (ctx) => {
     let user = ctx.message.from;
-
-    //Member serve solo per prendere lo status della chat (lo user lo ho già da message.from)
+    //Member is only needed to get the chat member status (The user object is already inside message.from)
     let member = await ctx.getChatMember(user.id);
 
     if (member.is_bot)
         return;
 
+    //Check if User is already saved in the DB
     let checkUser = await User.findOne( {id: user.id} );
-
-    console.log(checkUser);
 
     if(!checkUser) {
         let newUser = new User({
@@ -26,12 +25,12 @@ module.exports = async (ctx) => {
 
         await newUser.save();
     }
-    let chat = await ctx.getChat();
 
+    let chat = await ctx.getChat();
+    //Check if Chat is already saved in the DB
     let checkChat = await Chat.findOne( {id: chat.id} );
 
     if(!checkChat){
-
         let newChat = new Chat({
             id: chat.id,
             type: chat.type,
@@ -46,5 +45,5 @@ module.exports = async (ctx) => {
 
         await newChat.save();
     }
-    ctx.reply("Hello, how are you?");
+    await ctx.reply("Hello, how are you?");
 }

@@ -2,5 +2,6 @@ module.exports = {
     separator: "~",
     maxLinesStored: 8,
     userAlias: "You: ",
-    botAlias: "Me: "
+    botAlias: "Me: ",
+    error_message: "Sorry, the BOT isn't able to fullfil your request at this time"
 }

@@ -5,21 +5,15 @@ const messageHandler = require('./core/message_handler');
 const databaseInit = require('./core/startup/database_init');
 
 mongoose.connect(process.env.MONGODB_CNN, {useNewUrlParser: true});
-
 const bot = new Telegraf(process.env.BOT_TOKEN)
+bot.use(session());
 
-bot.use(session())
-
+bot.start(databaseInit);
+bot.on('text', messageHandler);
 bot.help((ctx) => ctx.reply('Send me a sticker'))
-
 bot.command('quit', async (ctx) => {
     await ctx.leaveChat()
 });
-
-bot.start(databaseInit);
-
-bot.on('text', messageHandler);
-
 bot.on('sticker', (ctx) => ctx.reply('ME NO LIKE STICKERS :('));
 
 bot.launch();

@@ -3,8 +3,9 @@ const User = require("../models/user");
 
 const SessionDocument = require("../classes/session_document");
 
+//For each new user a session is created
 module.exports = async (ctx) => {
-    //console.log("Assigned session variable of user " + user.id);
+    //Load the user's saved conversation from the DB
     let mongoUser = await User.findOne({"id":ctx.message.from.id});
 
     if (mongoUser == null)

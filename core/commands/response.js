@@ -1,11 +1,14 @@
-const generateText = require('../utils/generate_text');
+const generateChatReply = require('../utils/generate_chat_reply');
 const config = require('../config');
 
-module.exports = async (ctx) => {
+async function response(ctx) {
     let document = ctx.session.document;
 
-    //`${document.context}You: ${ctx.message.text}${config.separator}Me: `
     let modifiedPrompt = document.context + config.userAlias + ctx.message.text + config.separator + config.botAlias;
+    await generateChatReply(ctx, modifiedPrompt);
+}
 
-    await generateText(ctx, modifiedPrompt);
+module.exports = {
+    help: "The default behaviour of the bot. It is implicitly called when a normal message is sent",
+    action: response
 }

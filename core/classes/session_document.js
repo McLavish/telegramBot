@@ -1,3 +1,4 @@
+//This object is stored in each session. It contains the DB Model instances for the user and the user's chat.
 module.exports = class SessionDocument {
     constructor(mongoUser, mongoChat) {
         this.mongoUser = mongoUser;
