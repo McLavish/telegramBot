@@ -1,8 +1,4 @@
-Fare l'escape della tilde in user input altrimenti mi esplode il programma
-Implementare un sitema per rendere dinamico il comando help
 Salvare anche l'immagine di profilo degli utenti nel database
-Scrivere in un file dentro a utils la parte le funzioni delle stringhe così non devo ripetere il codice tutte le volte
-Aggiungere i commenti
 Aggiungere le API localhost per fare da hook al pannello web
 Provare a rimpizzare l'ID autogenerato con l'ID di telegra, sperando che non dia problemi con Mongoose
 Aggiungere la compatibilità del bot con le chat di gruppo implementando l'event new_member (https://stackoverflow.com/questions/52029026/telegram-python-bot-event-when-bot-is-added-to-a-group)
