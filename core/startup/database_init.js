@@ -11,7 +11,7 @@ module.exports = async (ctx) => {
         return;
 
     //Check if User is already saved in the DB
-    let checkUser = await User.findOne( {id: user.id} );
+    let checkUser = await User.findOne({id: user.id}).exec();
 
     if(!checkUser) {
         let newUser = new User({
@@ -28,7 +28,7 @@ module.exports = async (ctx) => {
 
     let chat = await ctx.getChat();
     //Check if Chat is already saved in the DB
-    let checkChat = await Chat.findOne( {id: chat.id} );
+    let checkChat = await Chat.findOne({id: chat.id}).exec();
 
     if(!checkChat){
         let newChat = new Chat({
