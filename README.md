@@ -20,7 +20,7 @@ See the relative software installation documentation
 
 ### Coding Style
 
-ESLint reccomanded coding style
+ESLint recommended coding style
 
 ## Authors
 
