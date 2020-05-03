@@ -12,11 +12,16 @@ however, due to the GPU limitations of Google Colab and my lack of machine learn
 
 This project makes use of the following software:
 
-- Node.js (optional: a local express server to connect to the WebPanel)
+- Node.js
 - Telegram APIs (a BOT api key is needed)
 - Google Colaboratory
 
 See the relative software installation documentation
+
+
+## Web Panel (W.I.P)
+
+https://github.com/McLavish/telegramBot_WebPanel
 
 ### Coding Style
 
@@ -24,7 +29,7 @@ ESLint recommended coding style
 
 ## Authors
 
-* **Luca P**
+* **Luca P.**
 
 See also the list of [contributors](https://github.com/McLavish/telegramBot/graphs/contributors) who participated in this project.
 
