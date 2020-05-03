@@ -1,7 +1,7 @@
 
 # Telegram Bot
 
-A GTP-2 1.5b chatbot on telegram with persistent sessions.
+A GTP-2 1.5b chatbot for Telegram with persistent sessions.
 
 his project was made to test the GTP-2 1.5b model using Google Colaboratory and Telegram APIs.
 It works like a chatbot by tricking the model into completing a conversation and parsing the output.
@@ -15,6 +15,7 @@ This project makes use of the following software:
 - Node.js
 - Telegram APIs (a BOT api key is needed)
 - Google Colaboratory
+- MongoDB Database
 
 See the relative software installation documentation
 
@@ -35,4 +36,4 @@ See also the list of [contributors](https://github.com/McLavish/telegramBot/grap
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
