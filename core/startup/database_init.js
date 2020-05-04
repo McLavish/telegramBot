@@ -1,7 +1,7 @@
 const User = require("../models/user");
 const Chat = require("../models/chat");
 
-//This function is called only once, when to user uses /start
+/** This function is called only once, when to user uses /start */
 module.exports = async (ctx) => {
     let user = ctx.message.from;
     //Member is only needed to get the chat member status (The user object is already inside message.from)

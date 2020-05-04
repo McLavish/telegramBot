@@ -4,7 +4,11 @@ const mongoose = require('mongoose');
 const messageHandler = require('./core/message_handler');
 const databaseInit = require('./core/startup/database_init');
 
-mongoose.connect(process.env.MONGODB_CNN, {useNewUrlParser: true});
+mongoose.connect(process.env.MONGODB_CNN, {useNewUrlParser: true}, (err) => {
+    if (err) throw err;
+    console.log('Mongoose connected!');
+});
+
 const bot = new Telegraf(process.env.BOT_TOKEN);
 bot.use(session());
 

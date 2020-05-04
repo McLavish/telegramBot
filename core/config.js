@@ -1,3 +1,4 @@
+/** Application config variables */
 module.exports = {
     separator: "~",
     maxLinesStored: 8,

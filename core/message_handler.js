@@ -4,7 +4,7 @@ const help = require('./commands/help');
 
 const timestamp = Math.floor(Date.now() / 1000);
 
-//This function handles the messages passed from the Telegram chat
+/** This function handles the messages passed from the Telegram chat */
 module.exports = async (ctx) => {
     let session = ctx.session;
     let message = ctx.message;

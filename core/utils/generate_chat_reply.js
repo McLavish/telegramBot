@@ -1,12 +1,16 @@
 const backendRequest = require('./backend_generate_text');
 const config = require('../config');
 
+/**
+ * Generate a chat reply and save it to the database
+ * @param {context} ctx - Telegram context with session
+ * @param {string} modifiedPrompt - the escaped user input
+ */
 module.exports = async (ctx, modifiedPrompt) => {
     let message = ctx.message;
     let document = ctx.session.document;
 
     try {
-        console.log(" ----------------------PROMPT ----------------------\n" + modifiedPrompt)
         let lines = modifiedPrompt.split(config.separator);
 
         //Build the input string replacing the separator with newline (the AI generation works better with newlines)
@@ -16,11 +20,9 @@ module.exports = async (ctx, modifiedPrompt) => {
         //Note: JavaScript doesn't have a replaceAll function (replace replaces only the first occurance)
         //replacement is done using array.split(<replaced_value>).join(<new_value>)
 
-        console.log(" ----------------------RAW INPUT ----------------------\n" + rawInput)
         let response = await backendRequest(rawInput);
         let filteredText = filterResponse(response.data.result);
 
-        console.log(" ----------------------RESPONSE ----------------------\n" + filteredText)
         if (filteredText)
             await ctx.reply(filteredText);
         else
@@ -31,7 +33,6 @@ module.exports = async (ctx, modifiedPrompt) => {
         //Add the reply to the saved context
         document.context += filteredText + config.separator;
 
-        console.log(" ----------------------DOCUMENT ----------------------\n" + document.context)
     } catch (e) {
         console.log(e.stack);
         await ctx.reply(config.error_message);

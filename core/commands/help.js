@@ -24,7 +24,7 @@ async function helpCommand(ctx, command) {
     else {
         let help = "Command not found\n" +
             "Use '/help <command_name>' to view a command definition\n" +
-            "Type '/help' to get a list of all commands"
+            "Type '/help' to get a list of all commands";
         await ctx.reply(help);
     }
 }
@@ -37,7 +37,7 @@ async function helpAll(ctx) {
         help += command.has_argument ? " <text>\n" : "\n";
     });
 
-    help += "Use /help <command_name> to view futher information about a command"
+    help += "Use /help <command_name> to view futher information about a command";
     await ctx.reply(help);
 }
 

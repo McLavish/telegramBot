@@ -9,7 +9,7 @@ async function prompt (ctx, argument) {
     }
 
     try {
-        let response = await generateText(argument,500)
+        let response = await generateText(argument,500);
         await ctx.reply(response.data.result);
 
     } catch (e) {

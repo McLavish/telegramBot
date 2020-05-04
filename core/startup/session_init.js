@@ -3,7 +3,7 @@ const User = require("../models/user");
 
 const SessionDocument = require("../classes/session_document");
 
-//For each new user a session is created
+/** For each new user a session is created */
 module.exports = async (ctx) => {
     //Load the user's saved conversation from the DB
     let mongoUser = await User.findOne({"id":ctx.message.from.id}).exec();
