@@ -11,7 +11,7 @@ async function revert (ctx) {
 
     //Always preserve the last line
     if (lines.length <= 1)
-        await ctx.reply("All lines already deleted!")
+        await ctx.reply("All lines already deleted!");
 
     else {
         lines.pop();
@@ -19,11 +19,11 @@ async function revert (ctx) {
         document.context = lines.join(config.separator) + config.separator;
         await document.dbSave();
 
-        await ctx.reply("Previous line deleted!")
+        await ctx.reply("Previous line deleted!");
     }
 }
 
 module.exports = {
     help: "Deletes the previous line of the conversation from the Bot memory",
     action: revert
-}
+};

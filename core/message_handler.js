@@ -53,4 +53,4 @@ module.exports = async (ctx) => {
         //The bot replies to the query with a generated response
         await commands.response.action(ctx);
     }
-}
+};

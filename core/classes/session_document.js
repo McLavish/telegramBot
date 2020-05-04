@@ -28,4 +28,4 @@ module.exports = class SessionDocument {
         await this.mongoChat.save();
         await this.mongoUser.save();
     }
-}
+};

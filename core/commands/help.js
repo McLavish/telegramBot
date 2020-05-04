@@ -11,7 +11,7 @@ function loadHelps(array){
             text: command.help,
             example: command.example,
             has_argument: !!command.has_argument
-        })
+        });
     }
 }
 
@@ -49,4 +49,4 @@ module.exports = async (ctx, argument = "") => {
     } else {
         await helpAll(ctx);
     }
-}
+};

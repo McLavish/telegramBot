@@ -8,4 +8,4 @@ async function forget (ctx) {
 module.exports = {
     help: "Deletes all the user saved information inserted with /remember",
     action: forget
-}
+};

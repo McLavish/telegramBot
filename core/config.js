@@ -7,4 +7,4 @@ module.exports = {
     userAlias: "You: ",
     botAlias: "Me: ",
     error_message: "Sorry, the BOT isn't able to fullfil your request at this time"
-}
+};

@@ -46,4 +46,4 @@ module.exports = async (ctx) => {
         await newChat.save();
     }
     await ctx.reply("Hello, how are you?");
-}
+};

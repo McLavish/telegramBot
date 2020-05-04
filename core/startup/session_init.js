@@ -18,4 +18,4 @@ module.exports = async (ctx) => {
         throw new Error("Chat not found! Database might be corrupted");
 
     ctx.session.document = new SessionDocument(mongoUser, mongoChat);
-}
+};

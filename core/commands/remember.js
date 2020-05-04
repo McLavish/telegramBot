@@ -29,4 +29,4 @@ module.exports = {
     example: "/remember You are talking inside the police station",
     has_argument: true,
     action: remember
-}
+};

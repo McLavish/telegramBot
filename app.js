@@ -1,11 +1,11 @@
 const Telegraf = require('telegraf');
-const session = require('telegraf/session')
+const session = require('telegraf/session');
 const mongoose = require('mongoose');
 const messageHandler = require('./core/message_handler');
 const databaseInit = require('./core/startup/database_init');
 
 mongoose.connect(process.env.MONGODB_CNN, {useNewUrlParser: true});
-const bot = new Telegraf(process.env.BOT_TOKEN)
+const bot = new Telegraf(process.env.BOT_TOKEN);
 bot.use(session());
 
 bot.start(databaseInit);

@@ -11,4 +11,4 @@ async function continuer(ctx) {
 module.exports = {
     help: "Forces the bot to continue the conversation without user input",
     action: continuer
-}
+};

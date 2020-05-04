@@ -17,4 +17,4 @@ async function response(ctx) {
 module.exports = {
     help: "The default behaviour of the bot. It is implicitly called when a normal message is sent",
     action: response
-}
+};

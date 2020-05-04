@@ -7,4 +7,4 @@ module.exports =  (prompt = "", length = 60, timeout = 5000) => {
             length: length,
             timeout: timeout
         });
-}
+};

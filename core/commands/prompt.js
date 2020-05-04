@@ -23,4 +23,4 @@ module.exports = {
     example: "/prompt Once upon a time there was a wolf alone in a forest",
     has_argument: true,
     action: prompt
-}
+};

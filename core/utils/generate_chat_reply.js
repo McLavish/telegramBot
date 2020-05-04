@@ -41,10 +41,10 @@ module.exports = async (ctx, modifiedPrompt) => {
         id: message.id,
         date: message.date,
         text: message.text
-    })
+    });
     //Save the context inside the db so if the user disconnects from the session it will still be available
     await document.dbSave();
-}
+};
 //GPT-2 Generates a full dialogue given a prompt, but I only want to take the first reply to the user message
 function filterResponse (rawText) {
     //Remove all text after User alias, taking only the first line generated

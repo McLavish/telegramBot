@@ -34,4 +34,4 @@ module.exports = {
     example: "/alter This is my new line!",
     has_argument: true,
     action: alter
-}
+};
